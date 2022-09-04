@@ -69,6 +69,7 @@
         "utility": "cpp",
         "deque": "cpp",
         "numeric": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "queue": "cpp"
     }
 }
