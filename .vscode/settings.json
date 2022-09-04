@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "iterator": "cpp",
         "__bit_reference": "cpp",
         "__bits": "cpp",
         "__config": "cpp",
@@ -42,6 +43,7 @@
         "iostream": "cpp",
         "istream": "cpp",
         "limits": "cpp",
+        "list": "cpp",
         "locale": "cpp",
         "memory": "cpp",
         "mutex": "cpp",
@@ -64,8 +66,9 @@
         "__functional_base": "cpp",
         "algorithm": "cpp",
         "functional": "cpp",
-        "iterator": "cpp",
-        "utility": "cpp"
-    },
-    "C_Cpp.errorSquiggles": "Disabled"
+        "utility": "cpp",
+        "deque": "cpp",
+        "numeric": "cpp",
+        "random": "cpp"
+    }
 }

@@ -26,32 +26,17 @@ public:
     }
 
     //2. operator study
-    T& operator[](int index)
-    {
-        return data[index];
-    }
-
-    const T& operator[](int index) const
-    {
-        return data[index];
-    }
-
+    T& operator[](int index) {return data[index];}
+    const T& operator[](int index) const{return data[index];}
+    
     T& at(int index)
     {
-        if(index < n)
-            return data[index];
+        if(index < n) return data[index];
         throw "Index out of range";
     }
 
-    size_t size() const
-    {
-        return n;
-    }
-
-    ~dynamic_array()
-    {
-        delete[] data;
-    }
+    size_t size() const{return n;}
+    ~dynamic_array(){delete[] data;}
 
     T* begin(){return data;}
     const T* begin() const{return data;}

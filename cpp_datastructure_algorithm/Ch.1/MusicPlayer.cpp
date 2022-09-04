@@ -34,8 +34,7 @@ public:
         else
         {
             new_track->next = front;
-            if(rear != front)
-                rear->next = new_track;
+            if(rear != front) rear->next = new_track;
             
             rear = new_track;
         }

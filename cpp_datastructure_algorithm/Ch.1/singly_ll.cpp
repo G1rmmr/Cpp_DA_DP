@@ -23,8 +23,7 @@ public:
     {
         auto new_node = new node {val, NULL};
 
-        if (head != NULL)
-            new_node->next = head;
+        if (head != NULL) new_node->next = head;
         head = new_node;
     }
 
