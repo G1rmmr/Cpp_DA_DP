@@ -72,6 +72,7 @@
         "random": "cpp",
         "queue": "cpp",
         "__functional_03": "cpp",
-        "unordered_set": "cpp"
+        "unordered_set": "cpp",
+        "__hash_table": "cpp"
     }
 }
