@@ -73,6 +73,9 @@
         "queue": "cpp",
         "__functional_03": "cpp",
         "unordered_set": "cpp",
-        "__hash_table": "cpp"
+        "__hash_table": "cpp",
+        "__tree": "cpp",
+        "map": "cpp",
+        "set": "cpp"
     }
 }
