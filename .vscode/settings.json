@@ -77,6 +77,8 @@
         "__tree": "cpp",
         "map": "cpp",
         "set": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "fstream": "cpp",
+        "iomanip": "cpp"
     }
 }
