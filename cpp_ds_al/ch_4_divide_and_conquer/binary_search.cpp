@@ -66,14 +66,3 @@ void RunLargeTest(int size, int num)
     if(search_result) std::cout << "Find element by binary search!" << std::endl;
     else std::cout << "Can't find element by binary search!" << std::endl;
 }
-
-int main()
-{
-    RunSmallTest();
-
-    RunLargeTest(100000, 36543);
-    RunLargeTest(1000000, 36543);
-    RunLargeTest(10000000, 36543);
-
-    return 0;
-}

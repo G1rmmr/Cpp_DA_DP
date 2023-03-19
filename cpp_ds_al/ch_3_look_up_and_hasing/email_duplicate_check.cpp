@@ -56,14 +56,3 @@ public:
         }
     }
 };
-
-int main()
-{
-    DuplicateChecker Checker(16);
-
-    Checker.Insert("blackhand2413@naver.com");
-    Checker.Insert("blckhnd.std@gmail.com");
-    Checker.Insert("blackhand2413@gmail.com");
-
-    return 0;
-}

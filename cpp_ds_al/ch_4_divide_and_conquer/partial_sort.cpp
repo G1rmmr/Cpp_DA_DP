@@ -117,10 +117,3 @@ void RunPartialSortTest()
     PrintVector<int>(s);
     std::cout << std::endl;
 }
-
-int main()
-{
-    RunPartialSortTest();
-    RunQuickSortTest();
-    return 0;
-}

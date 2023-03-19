@@ -111,32 +111,3 @@ private:
         InOrderImple(start->Right);
     }
 };
-
-int main()
-{
-    BST Tree;
-    Tree.Insert(12);
-    Tree.Insert(10);
-    Tree.Insert(20);
-    Tree.Insert(8);
-    Tree.Insert(11);
-    Tree.Insert(15);
-    Tree.Insert(28);
-    Tree.Insert(4);
-    Tree.Insert(2);
-
-    std::cout << "Inorder travel: ";
-    Tree.InOrder();
-    std::cout << std::endl;
-
-    Tree.DeleteData(12);
-
-    std::cout << "Inorder travel after delete <12>: ";
-    Tree.InOrder();
-    std::cout << std::endl;
-
-    if(Tree.Find(12)) std::cout << "The element <12> is in the tree." << std::endl;
-    else std::cout << "The element <12> isn't in the tree." << std::endl;
-
-    return 0;
-}

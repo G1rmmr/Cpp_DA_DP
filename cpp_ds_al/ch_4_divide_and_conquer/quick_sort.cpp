@@ -79,9 +79,3 @@ void RunQuickSortTest()
 
     std::cout << std::endl;
 }
-
-int main()
-{
-    RunQuickSortTest();
-    return 0;
-}

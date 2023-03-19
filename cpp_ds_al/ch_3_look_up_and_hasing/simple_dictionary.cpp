@@ -37,29 +37,3 @@ public:
         }
     }
 };
-
-int main()
-{
-    HashMap Map(7);
-
-    auto Print = [&](int target)
-    {
-        if(Map.Find(target)) std::cout << "Find <" << target << "> from Checker.";
-        else std::cout << "Can't find <" << target << "> from Checker.";
-        std::cout << std::endl;
-    };
-
-    Map.Insert(2);
-    Map.Insert(25);
-    Map.Insert(10);
-
-    Print(25);
-
-    Map.Insert(100);
-
-    Print(100);
-    Print(2);
-
-    Map.Erase(25);
-    return 0;
-}

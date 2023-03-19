@@ -84,9 +84,3 @@ void RunMergeSortTest()
 
     std::cout << std::endl;
 }
-
-int main()
-{
-    RunMergeSortTest();
-    return 0;
-}

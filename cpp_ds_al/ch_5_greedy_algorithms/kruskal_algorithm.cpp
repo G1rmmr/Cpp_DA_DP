@@ -150,33 +150,3 @@ Graph<T> MinimumSpanningTree(const Graph<T>& graph)
     }
     return MST;
 }
-
-int main()
-{
-    using T = unsigned;
-    Graph<T> graph(9);
-
-    std::map<unsigned, std::vector<std::pair<unsigned, T>>> edge_map;
-
-    edge_map[1] = {{2, 2}, {5, 3}};
-    edge_map[2] = {{1, 2}, {5, 5}, {4, 1}};
-    edge_map[3] = {{4, 2}, {7, 3}};
-    edge_map[4] = {{2, 1}, {3, 2}, {5, 2}, {6, 4}, {8, 5}};
-    edge_map[5] = {{1, 3}, {2, 5}, {4, 2}, {8, 3}};
-    edge_map[6] = {{4, 4}, {7, 4}, {8, 1}};
-    edge_map[7] = {{3, 3}, {6, 4}};
-    edge_map[8] = {{4, 5}, {5, 3}, {6, 1}};
-
-    for(auto& edge : edge_map)
-        for(auto& e : edge.second)
-            graph.AddEdge(Edge<T>{edge.first, e.first, e.second});
-
-    std::cout << "[Inputed graph]" << std::endl;
-    std::cout << graph << std::endl;
-
-    Graph<T> MST = MinimumSpanningTree(graph);
-    std::cout << "[Minimum spanning tree]" << std::endl;
-    std::cout << MST;
-
-    return 0;
-}

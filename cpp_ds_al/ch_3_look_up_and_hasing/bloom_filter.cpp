@@ -43,19 +43,3 @@ public:
         std::cout << std::endl;
     }
 };
-
-int main()
-{
-    DuplicateChecker Checker(7);
-
-    Checker.Insert(100);
-    Checker.Insert(54);
-    Checker.Insert(82);
-
-    Checker.LookUp(5);
-    Checker.LookUp(50);
-    Checker.LookUp(20);
-    Checker.LookUp(54);
-
-    return 0;
-}

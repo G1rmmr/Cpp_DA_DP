@@ -105,34 +105,3 @@ struct OrganizationTree
         }
     }
 };
-
-int main()
-{
-    auto tree = OrganizationTree::CreateOranization("CEO");
-
-    tree.AddSubOrdinate("CEO", "Vice president");
-
-    tree.AddSubOrdinate("Vice president", "IT Director");
-    tree.AddSubOrdinate("Vice president", "Marketing manager");
-
-    tree.AddSubOrdinate("IT Director", "Security team leader");
-    tree.AddSubOrdinate("IT Director", "Application development team leader");
-
-    tree.AddSubOrdinate("Marketing manager", "Logistics team leader");
-    tree.AddSubOrdinate("Marketing manager", "PR team leader");
-
-    tree.AddSubOrdinate("Vice president", "Treasurer");
-    std::cout << std::endl;
-
-    OrganizationTree::PreOrder(tree.Root);
-    std::cout << std::endl;
-
-    OrganizationTree::InOrder(tree.Root);
-    std::cout << std::endl;
-
-    OrganizationTree::PostOrder(tree.Root);
-    std::cout << std::endl;
-
-    OrganizationTree::LevelOrder(tree.Root);
-    return 0;
-}

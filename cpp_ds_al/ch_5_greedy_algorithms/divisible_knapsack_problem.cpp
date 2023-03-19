@@ -56,31 +56,3 @@ auto FillKnapsack(std::vector<Object>& objects, int knapsack_capacity)
 
     return knapsack_contents;
 }
-
-int main()
-{
-    std::vector<Object> objects;
-    objects.reserve(7);
-
-    std::vector<int> weights = {1, 2, 5, 9, 2, 3, 4};
-    std::vector<double> values = {10, 7, 15, 10, 12, 11, 5};
-
-    for(auto i = 0; i < 7; ++i)
-        objects.emplace_back(Object(i + 1, weights[i], values[i]));
-
-    std::cout << "[Usable objects info]" << std::endl;
-    for(auto& o : objects) std::cout << o << std::endl;
-
-    std::cout << std::endl;
-
-    int knapsack_capacity = 7;
-    auto solution = FillKnapsack(objects, knapsack_capacity);
-
-    std::cout << "[The objects that put knapsack in (Maximum capacity = "
-        << knapsack_capacity << ")]" << std::endl;
-
-    for(auto& o: solution) std::cout << o << std::endl;
-    std::cout << std::endl;
-
-    return 0;
-}

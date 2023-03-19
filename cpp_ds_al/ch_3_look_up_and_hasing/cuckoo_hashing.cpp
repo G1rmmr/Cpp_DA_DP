@@ -123,33 +123,3 @@ public:
         else std::cout << "Can't find key <" << key << "> from Checker." << std::endl;
     }
 };
-
-int main()
-{
-    HashMap Map(7);
-    Map.Print();
-
-    std::cout << std::endl;
-
-    Map.Insert(10);
-    Map.Insert(20);
-    Map.Insert(30);
-
-    std::cout << std::endl;
-
-    Map.Insert(104);
-    Map.Insert(2);
-    Map.Insert(70);
-    Map.Insert(9);
-    Map.Insert(90);
-    Map.Insert(2);
-    Map.Insert(7);
-
-    std::cout << std::endl;
-
-    Map.Print();
-    std::cout << std::endl;
-
-    Map.Insert(14);
-    return 0;
-}

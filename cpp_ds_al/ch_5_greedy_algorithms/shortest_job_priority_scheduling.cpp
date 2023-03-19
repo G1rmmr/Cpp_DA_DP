@@ -42,19 +42,3 @@ void ComputeAndPrintWaitingTimes(std::vector<T>& service_times)
 
     std::cout << "- Average waiting time: " << avg_waiting_times << std::endl;
 }
-
-int main()
-{
-    std::vector<int> service_times = {8, 1, 2, 4, 9, 2, 3, 5};
-
-    std::cout << "[Previous of service times & waiting times]" << std::endl;
-    ComputeAndPrintWaitingTimes<int>(service_times);
-
-    std::sort(service_times.begin(), service_times.end());
-    std::cout << std::endl;
-
-    std::cout << "[Service times & waiting times after sort]" << std::endl;
-    ComputeAndPrintWaitingTimes<int>(service_times);
-
-    return 0;
-}

@@ -26,14 +26,3 @@ public:
         << iter->second << ">." << std::endl;
     }
 };
-
-int main()
-{
-    TinyURL TinyURLContainer;
-
-    TinyURLContainer.Insert("blackhand", "www.blackhand.com");
-    TinyURLContainer.Search("blackhand");
-
-    TinyURLContainer.Search("_Grammer");
-    return 0;
-}

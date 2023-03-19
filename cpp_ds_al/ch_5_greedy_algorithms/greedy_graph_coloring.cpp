@@ -111,33 +111,3 @@ void PrintColors(std::vector<T>& colors)
     for(auto color = 1; color < colors.size(); ++color)
         std::cout << color << ": " << color_map[colors[color]] << std::endl;
 }
-
-int main()
-{
-    using T = unsigned;
-    Graph<T> graph(9);
-
-    std::map<unsigned, std::vector<std::pair<unsigned, T>>> edge_map;
-
-    edge_map[1] = {{2, 0}, {5, 0}};
-    edge_map[2] = {{1, 0}, {5, 0}, {4, 0}};
-    edge_map[3] = {{4, 0}, {7, 0}};
-    edge_map[4] = {{2, 0}, {3, 0}, {5, 0}, {6, 0}, {8, 0}};
-    edge_map[5] = {{1, 0}, {2, 0}, {4, 0}, {8, 0}};
-    edge_map[6] = {{4, 0}, {7, 0}, {8, 0}};
-    edge_map[7] = {{3, 0}, {6, 0}};
-    edge_map[8] = {{4, 0}, {5, 0}, {6, 0}};
-
-    for(auto& edge : edge_map)
-        for(auto& e : edge.second)
-            graph.AddEdge(Edge<T>{edge.first, e.first, e.second});
-
-    std::cout << "[Inputed graph]" << std::endl;
-    std::cout << graph << std::endl;
-
-    auto colors = GreedyColoring<T>(graph);
-    std::cout << "[Graph coloring]" << std::endl;
-    PrintColors(colors);
-
-    return 0;
-}

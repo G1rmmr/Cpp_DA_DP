@@ -75,24 +75,3 @@ struct Graph
         {return pair.first == num_1;});
     }
 };
-
-int main()
-{
-    Graph graph(6);
-
-    graph.AddEdge(City::LONDON, City::MOSCOW, 2500);
-    graph.AddEdge(City::LONDON, City::SEOUL, 9000);
-    graph.AddEdge(City::LONDON, City::DUBAI, 5500);
-
-    graph.AddEdge(City::SEOUL, City::MOSCOW, 6600);
-    graph.AddEdge(City::SEOUL, City::SEATTLE, 8000);
-    graph.AddEdge(City::SEOUL, City::DUBAI, 7000);
-    graph.AddEdge(City::SEOUL, City::SYDNEY, 8000);
-
-    graph.AddEdge(City::SEATTLE, City::MOSCOW, 8400);
-    graph.AddEdge(City::SEATTLE, City::SYDNEY, 12000);
-    graph.AddEdge(City::SEATTLE, City::LONDON, 8000);
-
-    graph.RemoveEdge(City::SEATTLE, City::LONDON);
-    return 0;
-}

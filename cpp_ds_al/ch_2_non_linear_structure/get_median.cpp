@@ -56,25 +56,3 @@ struct Median
         return MaxHeap.top();
     }
 };
-
-int main()
-{
-    Median Median;
-
-    Median.Insert(1);
-    std::cout << "The median after <1> insert: " << Median.get() << std::endl;
-
-    Median.Insert(5);
-    std::cout << "The median after <5> insert: " << Median.get() << std::endl;
-
-    Median.Insert(2);
-    std::cout << "The median after <2> insert: " << Median.get() << std::endl;
-
-    Median.Insert(10);
-    std::cout << "The median after <10> insert: " << Median.get() << std::endl;
-
-    Median.Insert(40);
-    std::cout << "The median after <40> insert: " << Median.get() << std::endl;
-    
-    return 0;
-}

@@ -43,13 +43,3 @@ void ReduceTest(std::vector<int> s)
 
     std::cout << "std::accumulate(), s: " << ans << std::endl;
 }
-
-int main()
-{
-    std::vector<int> s = {1, 10, 4, 7, 3, 5, 6, 9, 8, 2};
-
-    TransformTest(s);
-    ReduceTest(s);
-
-    return 0;
-}

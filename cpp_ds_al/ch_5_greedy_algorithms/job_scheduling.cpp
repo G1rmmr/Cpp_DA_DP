@@ -52,24 +52,3 @@ void PrintJobs(std::vector<Job> jobs)
     }
     std::cout << std::endl;
 }
-
-int main()
-{
-    std::vector<Job> jobs;
-    std::vector<int> start_times = {5, 6, 16, 7, 9, 10, 6, 2, 10, 4}
-    , end_times = {9, 20, 19, 10, 19, 19, 12, 17, 13, 7};
-
-    for(auto i = 0; i < 10; ++i)
-        jobs.emplace_back(Job(i + 1, start_times[i], end_times[i]));
-
-    std::cout << "[All jobs]" << std::endl;
-    PrintJobs(jobs);
-
-    int n = 10;
-    auto scheduled = Schedule(jobs, n);
-
-    std::cout << "[Jobs after scheduling]" << std::endl;
-    PrintJobs(scheduled);
-
-    return 0;
-}

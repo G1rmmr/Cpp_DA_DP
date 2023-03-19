@@ -183,9 +183,3 @@ void RunLinearSelectTest()
     std::cout << "11th element: " 
         << *LinearTimeSelect<int>(s1.begin(), s1.end() - 1, 11) << std::endl;
 }
-
-int main()
-{
-    RunLinearSelectTest();
-    return 0;
-}
