@@ -1,243 +1,272 @@
 #include <iostream>
-#include <algorithm>
 #include <string>
 
-using namespace std;
-
-struct circular_ll_node
+namespace Circular
 {
-    string data;
-    circular_ll_node* next;
-};
-
-class music_player
-{
-public:
-    using track = circular_ll_node;
-    using track_ptr = track*;
-
-private:
-    track_ptr front;
-    track_ptr rear;
-
-public:
-    void printall();
-
-    circular_ll_node* next(const string& track_name);
-    circular_ll_node* previous(const string& track_name);
-
-    void insert(const string& track_name);
-    void remove(const string& track_name);
-
-    void add_track(const string& track_name)
+    template <typename T>
+    struct Node
     {
-        auto new_track = new track {track_name, nullptr};
+        T* Data;
+        Node* Next;
+        Node* Prev;
 
-        if(front == nullptr)
+        ~Node()
         {
-            front = new_track;
-            front->next = front;
-            rear = front;
-        }
-        else
-        {
-            new_track->next = front;
-            if(rear != front) rear->next = new_track;
-            
-            rear = new_track;
-        }
-        cout << track_name << " is added in player." << endl;
-    }
-
-    void delete_track()
-    {
-        auto start = front;
-        
-        if(start)
-        {
-            front = front->next;
-            rear->next = front;
-
-            cout << rear->data << "is deleting..." << endl;
-            delete start;
-        }
-        else
-        {
-            cout << "Player has no track to delete!!" << endl;
-        }
-    }
-
-    struct music_player_iterator
-    {
-    private:
-        track_ptr ptr;
-
-    public:
-        music_player_iterator(track_ptr p) : ptr(p){}
-
-        string& operator*(){return ptr->data;}
-
-        track_ptr get(){return ptr;}
-
-        music_player_iterator& operator++()
-        {
-            if (ptr->next == *this)
-            {
-                return nullptr;
-            }
-            return *this;
-        }
-
-        music_player_iterator operator++(int)
-        {
-            music_player_iterator result = *this;
-            ++(*this);
-            return result;
-        }
-
-        friend bool operator==(const music_player_iterator& left,
-            const music_player_iterator& right)
-        {
-            return left.ptr == right.ptr;
-        }
-
-        friend bool operator!=(const music_player_iterator& left,
-            const music_player_iterator& right)
-        {
-            return left.ptr != right.ptr;
+            delete Data;
         }
     };
 
-    music_player_iterator begin() {return music_player_iterator(front);}
-    music_player_iterator end() {return nullptr;}
-    music_player_iterator begin() const {return music_player_iterator(front);}
-    music_player_iterator end() const {return nullptr;}
-
-    music_player() = default;
-
-    music_player(const music_player& other) : front(), rear(nullptr)
+    template <typename T>
+    class List
     {
-        if(other.front)
+    public:
+        using Node = Node<T>;
+        using NodePtr = Node*;
+
+    private:
+        NodePtr mHead;
+        size_t mSize;
+
+    public:
+        List() : mSize(0)
         {
-            front = new track{"0", nullptr};
-            rear = front;
+            mHead = new Node {nullptr, nullptr, nullptr};
+            mHead->Next = mHead;
+            mHead->Prev = mHead;
+        }
 
-            auto cur = front;
-            auto it = other.begin();
+        size_t GetSize() const { return mSize; }
 
-            while(true)
+        void InsertNode(const T& Value)
+        {
+            NodePtr NewNode = new Node {
+                new T(Value), nullptr, nullptr
+            };
+
+            mSize++;
+            Node* Dummy = mHead->Prev;
+        
+            Dummy->Next = NewNode;
+            NewNode->Prev = Dummy;
+
+            if (mHead == Dummy)
             {
-                cur->data = *it;
+                Dummy->Prev = NewNode;
+                NewNode->Next = Dummy;
+                mHead = NewNode;
+            }
+            else
+            {
+                NewNode->Next = mHead;
+                mHead->Prev = NewNode;
+            }
+            mHead = NewNode;
+        }
 
-                auto tmp = it;
-                ++tmp;
+        void RemoveNode(const T& Value)
+        {
+            NodePtr NowNode = mHead;
+            NodePtr Dummy = mHead->Prev;
 
-                if(tmp == other.end())
-                    break;
+            while (NowNode != Dummy)
+            {
+                if(*(NowNode->Data) == Value)
+                {
+                    NowNode->Prev->Next = NowNode->Next;
+                    NowNode->Next->Prev = NowNode->Prev;
+
+                    if (NowNode == mHead)
+                    {
+                        mHead = mHead->Next;
+                    }
+
+                    delete NowNode;
+                    mSize--;
                 
-                cur->next = new track{"0", nullptr};
-                cur = cur->next;
-                it = tmp;
+                    return;
+                }
+                NowNode = NowNode->Next;
             }
         }
+
+        struct Iterator
+        {
+        private:
+            NodePtr mPtr;
+
+        public:
+            Iterator(const NodePtr& Ptr) : mPtr(Ptr){}
+
+            T& operator*() {return *(mPtr->Data);}
+
+            NodePtr GetPtr() {return mPtr;}
+
+            Iterator& operator++()
+            {
+                mPtr = mPtr->Next;
+                return *this;
+            }
+
+            Iterator operator++(int)
+            {
+                Iterator Iter = *this;
+                ++(*this);
+
+                return Iter;
+            }
+
+            Iterator& operator--()
+            {
+                mPtr = mPtr->Prev;
+                return *this;
+            }
+
+            Iterator operator--(int)
+            {
+                Iterator Iter = *this;
+                --(*this);
+
+                return Iter;
+            }
+
+            friend bool operator==(const Iterator& Iter1,
+                const Iterator& Iter2)
+            {
+                return Iter1.mPtr == Iter2.mPtr;
+            }
+
+            friend bool operator!=(const Iterator& Iter1,
+                const Iterator& Iter2)
+            {
+                return Iter1.mPtr != Iter2.mPtr;
+            }
+        };
+
+        Iterator begin()
+        {
+            return Iterator(mHead);
+        }
+
+        Iterator begin() const
+        {
+            return Iterator(mHead);
+        }
+
+        Iterator end()
+        {
+            return Iterator(mHead->Prev);
+        }
+
+        Iterator end() const
+        {
+            return Iterator(mHead->Prev);
+        }
+
+        List(const List<T>& Other) : List()
+        {
+            for (const auto& Node : Other)
+            {
+                InsertNode(Node);
+            }
+        }
+
+        List(const std::initializer_list<T>& InitList) :
+            mHead(nullptr),
+            mSize(0)
+        {
+            for (const auto& Node : InitList)
+            {
+                InsertNode(Node);
+            }
+        }
+
+        ~List()
+        {
+            while (GetSize())
+            {
+                RemoveNode(*(mHead->Data));
+            }
+            delete mHead;
+        }
+    };
+};
+
+struct MusicPlayer
+{
+    Circular::List<std::string> Player;
+    Circular::List<std::string>::Iterator NowTrack = nullptr;
+
+    void SetNowPlay(int TrackNo)
+    {
+        auto Iter = Player.begin();
+
+        while (TrackNo--)
+        {
+            Iter++;
+        }
+
+        NowTrack = --Iter;
+
+        std::cout << "\nNow Playing... <"
+            << *NowTrack.GetPtr()->Data << ">\n";
     }
-    music_player(const initializer_list<string>& ilist) :
-        front(), rear(nullptr) {
-        for(auto it = rbegin(ilist);it != rend(ilist); it++)
-            add_track(*it);
+
+    void PrintAll()
+    {
+        unsigned int TrackNo = 1;
+        std::cout << "\n[ Current Track List ]\n";
+
+        for (const auto& Track : Player)
+        {
+            std::cout << TrackNo++ << ' ' << Track << '\n';
+        }
+        std::cout << '\n';
+    }
+
+    void InsertTrack(const std::string& TrackName)
+    {
+        Player.InsertNode(TrackName);
+        std::cout << "The Track <" << TrackName << "> is inserted!\n";
+    }
+
+    void RemoveTrack(const std::string& TrackName)
+    {
+        Player.RemoveNode(TrackName);
+        std::cout << "The Track <" << TrackName << "> is deleted!\n";
+    }
+
+    void PlayNext()
+    {
+        std::cout << "Now Play the Next Track <" 
+            << *(++NowTrack) << "> \n";
+    }
+
+    void PlayPrev()
+    {
+        std::cout << "Now Play the Previous Track <" 
+            << *(--NowTrack) << "> \n";
     }
 };
 
-void music_player::printall()
-{
-    cout << "\nNow Playing...\n";
-
-    int track_no = 1;
-
-    for (auto iter = front; iter <= rear; iter = iter->next)
-    {
-        cout << track_no++ << ' ' << iter->data << ' ';
-    }
-    cout << '\n';
-}
-
-circular_ll_node* music_player::next(const string& track_name)
-{
-    cout << "\nPlay the next track.\nNow Playing...";
-
-    for (auto iter = front; iter <= rear; iter = iter->next)
-    {
-        if (iter->data == track_name)
-        {
-            cout << iter->next->data << '\n';
-            return iter->next;
-        }
-    }
-}
-
-circular_ll_node* music_player::previous(const string& track_name)
-{
-    cout << "\nPlay the previous track.\nNow Playing...";
-
-    for (auto iter = front; iter <= rear; iter = iter->next)
-    {
-        if (iter->next->data == track_name)
-        {
-            cout << iter->data << '\n';
-            return iter;
-        }
-    }
-}
-
-void music_player::insert(const string& track_name)
-{
-    add_track(track_name);
-}
-
-void music_player::remove(const string& track_name)
-{
-    auto iter = front;
-    bool is_exist = false;
-
-    for (; iter <= rear; iter = iter->next)
-    {
-        if (iter->data == track_name)
-        {
-            is_exist = true;
-            break;
-        }
-    }
-
-    if (is_exist)
-    {
-        previous(track_name)->next = next(track_name);
-        cout << "\nNow The track (" << track_name << ") Deleted.\n";
-    }
-    else
-    {
-        cout << "Player has no track to delete!!" << endl;
-    }
-}
-
 int main()
 {
-    music_player mp3;
+    MusicPlayer iPod;
+    iPod.NowTrack = iPod.Player.begin();
+    
+    iPod.InsertTrack("Everglow"); // No.1
+    iPod.InsertTrack("Haven"); // No.2
+    iPod.InsertTrack("No Fear No More"); // No.3
+    iPod.InsertTrack("Mirror"); // No.4
+    iPod.InsertTrack("Boy-X"); // No.5
 
-    mp3.insert("Everglow");
-    mp3.insert("Haven");
-    mp3.insert("No Fear No More");
-    mp3.insert("Mirror");
-    mp3.insert("Boy-X");
+    iPod.SetNowPlay(2);
+    iPod.PrintAll();
 
-    std::cout << *mp3.begin() << '\n';
+    iPod.PlayNext();
+    
+    iPod.RemoveTrack("Mirror");
+    iPod.PlayPrev();
 
-    mp3.printall();
-
-    mp3.next("Haven");
-    mp3.previous("mirror");
-
-    mp3.remove("Boy-X");
-
-    mp3.printall();
+    iPod.PrintAll();
     return 0;
 }
